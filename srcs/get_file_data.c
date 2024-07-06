@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:32:18 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/05 18:35:46 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:42:45 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_height(char *file_name)
 
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
-		exit (1);
+		exit (EXIT_FAILURE);
 	height = 0;
 	while (1)
 	{
@@ -59,6 +59,7 @@ static int	ft_wdcounter(char *line, char sep)
 	return (i);
 }
 
+// TODO: fix bug has space EOL
 static int	end_gnl(int fd, int width)
 {
 	char	*line;
@@ -80,7 +81,6 @@ static int	end_gnl(int fd, int width)
 int	get_width(char *file_name)
 {
 	int		width;
-	int		width_tmp;
 	int		fd;
 	char	*line;
 
@@ -90,7 +90,6 @@ int	get_width(char *file_name)
 	width = 0;
 	line = get_next_line(fd);
 	width = ft_wdcounter(line, ' ');
-	width_tmp = width;
 	free(line);
 	while (1)
 	{
