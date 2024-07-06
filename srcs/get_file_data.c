@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:32:18 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 19:42:45 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:18:36 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,23 @@ int	get_height(char *file_name)
 static int	ft_wdcounter(char *line, char sep)
 {
 	int	i;
-	int	is_in_wd;
+	int	in_wd;
 
 	if (line == NULL)
 		return (-1);
 	i = 0;
-	is_in_wd = 0;
+	in_wd = 0;
 	while (*line)
 	{
-		while (*line && *line == sep)
-			line++;
-		if (*line != '\0')
-			is_in_wd = 1;
-		if (is_in_wd == 1)
+		if (*line == sep)
+			in_wd = 0;
+		else if (in_wd == 0 && *line != sep)
+		{
+			in_wd = 1;
 			i++;
-		while (*line && *line != sep)
-			line++;
-		if (*line != '\0')
-			is_in_wd = 0;
+		}
+		line++;
+		ft_printf("line : %s i : %d\n", line, i);
 	}
 	return (i);
 }
@@ -93,6 +92,7 @@ int	get_width(char *file_name)
 	free(line);
 	while (1)
 	{
+		ft_printf("------enf_gnl------\n");
 		if (EOF == end_gnl(fd, width))
 			break ;
 	}

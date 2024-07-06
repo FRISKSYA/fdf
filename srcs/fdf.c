@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:53:23 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 16:14:43 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:27:29 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 static int	init_data(t_fdf	*data, char *file_name)
 {
 	if (malloc_data(file_name, data) == MALLOC_ERROR)
+	{
+		perror("MALLOC_ERROR");
 		exit(EXIT_FAILURE);
+	}
 	if (read_file(file_name, data) == READ_ERROR)
+	{
+		perror("READ_ERROR");
 		exit(EXIT_FAILURE);
+	}
 	data->shift_x = WIDTH / 5;
 	data->shift_y = HEIGHT / 5;
 	data->mlx = mlx_init();
@@ -38,10 +44,16 @@ int	main(int argc, char **argv)
 	t_fdf	*data;
 
 	if (argc != 2)
+	{
+		perror("ARGC_ERROR");
 		exit (EXIT_SUCCESS);
+	}
 	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (data == NULL)
+	{
+		perror("MALLOC_ERROR");
 		exit (EXIT_FAILURE);
+	}
 	init_data(data, argv[1]);
 	draw(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
