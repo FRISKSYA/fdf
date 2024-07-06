@@ -3,81 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <kfukuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:10:21 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/23 17:51:52 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:59:26 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	get_height(char *file_name)
-{
-	char	*line;
-	int		fd;
-	int		height;
-
-	fd = open(file_name, O_RDONLY, 0);
-	if (fd < 0)
-		exit (1);
-	height = 0;
-	line = NULL;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		height++;
-		free(line);
-	}
-	close(fd);
-	return (height);
-}
-
-int	ft_wdcounter(char *line, char sep)
-{
-	int	i;
-	int	is_in_wd;
-
-	if (line == NULL)
-		return (-1);
-	i = 0;
-	is_in_wd = 0;
-	while (*line)
-	{
-		while (*line && *line == sep)
-			line++;
-		if (*line != '\0')
-			is_in_wd = 1;
-		if (is_in_wd == 1)
-			i++;
-		while (*line && *line != sep)
-			line++;
-		if (*line != '\0')
-			is_in_wd = 0;
-	}
-	return (i);
-}
-
-int	get_width(char *file_name)
-{
-	int		width;
-	int		fd;
-	char	*line;
-
-	fd = open(file_name, O_RDONLY, 0);
-	if (fd < 0)
-		exit (1);
-	width = 0;
-	line = NULL;
-	line = get_next_line(fd);
-	width = ft_wdcounter(line, ' ');
-	free(line);
-	while ((line = get_next_line(fd)) != NULL)
-		free(line);
-	close(fd);
-	return (width);
-}
-
-void	fill_matrix(int  *z_line, char *line)
+static void	fill_matrix(int *z_line, char *line)
 {
 	int		i;
 	char	**nums;
@@ -93,21 +28,39 @@ void	fill_matrix(int  *z_line, char *line)
 	free(nums);
 }
 
-void	read_file(char *file_name, t_fdf *data)
+int	malloc_data(char *file_name, t_fdf *data)
 {
-	int		fd;
-	char	*line;
 	int		i;
 
 	data->height = get_height(file_name);
 	data->width = get_width(file_name);
 	data->z_matrix = (int **)malloc(sizeof(int *) * (data->height + 1));
+	if (data->z_matrix == NULL)
+		return (MALLOC_ERROR);
 	i = 0;
-	while (i <= data->height)
-		data->z_matrix[i++] = (int *)malloc(sizeof(int) * (data->width + 1));
+	while (i < data->height)
+	{
+		data->z_matrix[i] = (int *)malloc(sizeof(int) * (data->width + 1));
+		if (data->z_matrix[i] == NULL)
+		{
+			free(data->z_matrix);
+			return (MALLOC_ERROR);
+		}
+		i++;
+	}
+	data->z_matrix[i] = NULL;
+	return (SUCCESS);
+}
+
+int	read_file(char *file_name, t_fdf *data)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
-		exit (1);
+		return (READ_ERROR);
 	i = 0;
 	line = NULL;
 	while (i < data->height)
@@ -118,5 +71,5 @@ void	read_file(char *file_name, t_fdf *data)
 		i++;
 	}
 	close(fd);
-	data->z_matrix[i] = NULL;
+	return (SUCCESS);
 }

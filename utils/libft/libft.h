@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.jp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 09:40:02 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/12 18:35:27 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:17:06 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <stdint.h>
 
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
