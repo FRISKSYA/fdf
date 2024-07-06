@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:53:23 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/05 19:30:43 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:14:43 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	init_data(t_fdf	*data, char *file_name)
 		exit(EXIT_FAILURE);
 	if (read_file(file_name, data) == READ_ERROR)
 		exit(EXIT_FAILURE);
+	data->shift_x = WIDTH / 5;
+	data->shift_y = HEIGHT / 5;
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "FDF");
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);

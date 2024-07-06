@@ -6,38 +6,11 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:55:24 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/05 19:27:46 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:13:51 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-static int	set_color(int z1, int z2)
-{
-	if (z1 || z2)
-		return (0x00FF0000);
-	else
-		return (0x00FFFFFF);
-}
-
-static void	apply_zoom(float *x, float *y, t_fdf *data)
-{
-	*x *= data->zoom;
-	*y *= data->zoom;
-}
-
-static t_point	get_steps(t_point p1, t_point p2)
-{
-	t_point	step;
-	int		max;
-
-	step.x = p2.x - p1.x;
-	step.y = p2.y - p1.y;
-	max = ft_max(ft_mod(step.x), ft_mod(step.y));
-	step.x /= max;
-	step.y /= max;
-	return (step);
-}
 
 static void	bresenham(t_point p1, t_point p2, t_fdf *data)
 {

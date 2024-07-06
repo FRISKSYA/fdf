@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 14:40:57 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/05 19:20:44 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:15:09 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 # define FDF_H
 
 // libs
+# include "../minilibx-linux/mlx.h"
 # include "../utils/ft_printf/ft_printf.h"
 # include "../utils/get_next_line/get_next_line.h"
 # include "../utils/libft/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <limits.h>
 # include <math.h>
 # include <stdbool.h>
-# include <stdlib.h>
 # include <stdint.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
+# include <stdlib.h>
 
 // window vars
 # define WIDTH 1920
 # define HEIGHT 1080
 # define ZOOM_BASE 50
-// Linux esc
+// Linux btn
 # define ESC 65307
+// # define SHIFT_RIGHT 65363
+// # define SHIFT_LEFT 65361
+// # define SHIFT_UP 65362
+// # define SHIFT_DOWN 65364
 
 typedef struct s_fdf
 {
@@ -47,6 +51,8 @@ typedef struct s_fdf
 	int		**z_matrix;
 	int		zoom;
 	int		color;
+	int		shift_x;
+	int		shift_y;
 	float	rotation;
 }			t_fdf;
 
@@ -72,6 +78,13 @@ typedef enum s_hooks
 // draw funcs
 void		my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 void		draw(t_fdf *data);
+int			set_color(int z1, int z2);
+void		apply_zoom(float *x, float *y, t_fdf *data);
+t_point		get_steps(t_point p1, t_point p2);
+//void		shift_point(t_point *p, t_fdf *data);
+
+// window ctl
+//int			shift_fdf(int key, t_fdf *data);
 
 // read_files
 int			malloc_data(char *file_name, t_fdf *data);
