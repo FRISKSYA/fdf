@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:32:18 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 20:18:36 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:27:06 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,12 @@ static int	ft_wdcounter(char *line, char sep)
 	{
 		if (*line == sep)
 			in_wd = 0;
-		else if (in_wd == 0 && *line != sep)
+		else if (in_wd == 0 && *line != sep && *line != '\n')
 		{
 			in_wd = 1;
 			i++;
 		}
 		line++;
-		ft_printf("line : %s i : %d\n", line, i);
 	}
 	return (i);
 }
@@ -92,7 +91,6 @@ int	get_width(char *file_name)
 	free(line);
 	while (1)
 	{
-		ft_printf("------enf_gnl------\n");
 		if (EOF == end_gnl(fd, width))
 			break ;
 	}
