@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:10:21 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 19:26:37 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:55:30 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	malloc_data(char *file_name, t_fdf *data)
 		i++;
 	}
 	data->z_matrix[i] = NULL;
-
 	return (SUCCESS);
 }
 
