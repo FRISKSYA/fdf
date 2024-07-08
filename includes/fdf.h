@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 14:40:57 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 16:15:09 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:09:03 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,11 @@ typedef enum s_hooks
 	ON_DESTROY = 17
 }			t_hooks;
 
-// fdf main
+// init
+int			is_fdf_file(char *file_name);
+void		init_data(t_fdf *data, char *file_name);
+void		init_mlx(t_fdf *data);
+void		init_position(t_fdf *data);
 
 // draw funcs
 void		my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
@@ -81,10 +85,6 @@ void		draw(t_fdf *data);
 int			set_color(int z1, int z2);
 void		apply_zoom(float *x, float *y, t_fdf *data);
 t_point		get_steps(t_point p1, t_point p2);
-//void		shift_point(t_point *p, t_fdf *data);
-
-// window ctl
-//int			shift_fdf(int key, t_fdf *data);
 
 // read_files
 int			malloc_data(char *file_name, t_fdf *data);

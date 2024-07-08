@@ -6,54 +6,18 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:53:23 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/08 16:24:02 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:13:29 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static int	init_mlx(t_fdf *data)
+static void	ctl_mlx(t_fdf *data)
 {
-	data->shift_x = WIDTH / 5;
-	data->shift_y = HEIGHT / 5;
-	data->mlx = mlx_init();
-	if (data->mlx == NULL)
-	{
-		perror("MLX_INIT");
-		exit(EXIT_FAILURE);
-	}
-	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "FDF");
-	if (data->mlx_win == NULL)
-	{
-		perror("MLX_NEW_WINDOW");
-		exit(EXIT_FAILURE);
-	}
-	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	if (data->img == NULL)
-	{
-		perror("MLX_NEW_IMAGE");
-		exit(EXIT_FAILURE);
-	}
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
-			&data->line_length, &data->endian);
-	data->zoom = ZOOM_BASE;
-	return (SUCCESS);
-}
-
-static int	init_data(t_fdf *data, char *file_name)
-{
-	if (malloc_data(file_name, data) == MALLOC_ERROR)
-	{
-		perror("MALLOC_ERROR");
-		exit(EXIT_FAILURE);
-	}
-	if (read_file(file_name, data) == READ_ERROR)
-	{
-		perror("READ_ERROR");
-		exit(EXIT_FAILURE);
-	}
-	init_mlx(data);
-	return (SUCCESS);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	mlx_hook(data->mlx_win, ON_KEYDOWN, 1L << 0, close_by_esc, data);
+	mlx_hook(data->mlx_win, ON_DESTROY, 1L << 17, exit_program, data);
+	mlx_loop(data->mlx);
 }
 
 int	main(int argc, char **argv)
@@ -63,7 +27,12 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		perror("ARGC_ERROR");
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
+	}
+	if (is_fdf_file(argv[1]) == false)
+	{
+		perror("FILE_NAME_ERROR");
+		exit(EXIT_FAILURE);
 	}
 	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (data == NULL)
@@ -72,9 +41,8 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	init_data(data, argv[1]);
+	init_mlx(data);
+	init_position(data);
 	draw(data);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	mlx_hook(data->mlx_win, ON_KEYDOWN, 1L << 0, close_by_esc, data);
-	mlx_hook(data->mlx_win, ON_DESTROY, 1L << 17, exit_program, data);
-	mlx_loop(data->mlx);
+	ctl_mlx(data);
 }

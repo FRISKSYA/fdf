@@ -13,7 +13,7 @@ GNL_DIR = ./utils/get_next_line
 MLX_DIR = ./minilibx-linux
 
 # Source files
-SRCS_FILES = fdf.c draw.c read_file.c exit.c math.c my_mlx_pixel_put.c get_file_data.c apply_zoom.c get_steps.c set_color.c
+SRCS_FILES = init.c fdf.c draw.c read_file.c exit.c math.c my_mlx_pixel_put.c get_file_data.c apply_zoom.c get_steps.c set_color.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 # Object files
