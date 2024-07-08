@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:06:14 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/08 17:07:46 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:41:42 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,5 @@ void	init_mlx(t_fdf *data)
 
 void	init_position(t_fdf *data)
 {
-	data->shift_x = WIDTH / 5;
-	data->shift_y = HEIGHT / 5;
-	data->zoom = ZOOM_BASE;
+	data->zoom = WIDTH / (data->width + data->height);
 }

@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:55:24 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 16:13:51 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:41:09 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	bresenham(t_point p1, t_point p2, t_fdf *data)
 	step = get_steps(p1, p2);
 	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
 	{
-		my_mlx_pixel_put(data, p1.x + (WIDTH / 4), p1.y + (HEIGHT / 4),
+		my_mlx_pixel_put(data, p1.x + (WIDTH / 3), p1.y + (HEIGHT / 5),
 			data->color);
 		p1.x += step.x;
 		p1.y += step.y;

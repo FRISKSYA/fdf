@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 14:40:57 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/08 17:09:03 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:42:35 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ typedef struct s_fdf
 	int		**z_matrix;
 	int		zoom;
 	int		color;
-	int		shift_x;
-	int		shift_y;
-	float	rotation;
 }			t_fdf;
 
 typedef struct s_point
