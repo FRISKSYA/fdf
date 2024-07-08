@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 17:32:18 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 20:27:06 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:03:47 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	get_height(char *file_name)
 
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
+	{
+		perror("READ_ERROR");
 		exit (EXIT_FAILURE);
+	}
 	height = 0;
 	while (1)
 	{
@@ -70,6 +73,7 @@ static int	end_gnl(int fd, int width)
 	if (width != width_tmp)
 	{
 		free(line);
+		perror("MAP_WIDTH_ERROR");
 		exit(EXIT_FAILURE);
 	}
 	free(line);
@@ -84,7 +88,10 @@ int	get_width(char *file_name)
 
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
+	{
+		perror("READ_ERROR");
 		exit (EXIT_FAILURE);
+	}
 	width = 0;
 	line = get_next_line(fd);
 	width = ft_wdcounter(line, ' ');
