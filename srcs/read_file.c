@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:10:21 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/08 15:55:30 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:01:53 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	malloc_data(char *file_name, t_fdf *data)
 		data->z_matrix[i] = (int *)malloc(sizeof(int) * (data->width + 1));
 		if (data->z_matrix[i] == NULL)
 		{
-			free(data->z_matrix);
+			free_z_matrix(data);
 			return (MALLOC_ERROR);
 		}
 		i++;

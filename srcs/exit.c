@@ -6,13 +6,13 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:37:23 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 16:14:25 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:00:33 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	free_z_matrix(t_fdf *data)
+void	free_z_matrix(t_fdf *data)
 {
 	int	i;
 

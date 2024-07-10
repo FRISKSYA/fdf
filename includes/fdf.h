@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 14:40:57 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/08 17:42:35 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:01:11 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int			ft_mod(float f);
 void		isometric(float *x, float *y, int z);
 
 // exit funcs
+void		free_z_matrix(t_fdf *data);
 int			close_by_esc(int key, t_fdf *data);
 int			exit_program(t_fdf *data);
 #endif
